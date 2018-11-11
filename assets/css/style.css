@@ -1,0 +1,14 @@
+.buttonPanel {
+    float: left;
+    width: 100%
+}
+
+.gifsPanel {
+    float: left;
+    width: 75%;
+}
+
+.searchPanel{
+    float: left;
+    width: 25%;
+}

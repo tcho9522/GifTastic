@@ -5,27 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>GIPHY</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
     <div class="buttonPanel"></div>
     <div class="gifsPanel"></div>
     <div class="searchPanel">
-        Add an animal
+        Add a GIF
         <input type="text" name="search">
         <button id="searchBut">Submit</button>
     </div>
 
     <script>
-
-        
+        var subject;
+        var apiKey = "NCXkoO2y6Zc39Z8PKqzd8WFmWSxhrlMm";
+        var amount = 25;
         $("#searchBut").click(function () {
             var animal = $("input").val();
-            $(".buttonPanel").append("<button id='button' buttonName='"+animal+"'>" + animal + "</button>");
-            console.log($(this).attr("buttonName"));
+            $(".buttonPanel").append("<button id='button' buttonName='" + animal + "'>" + animal + "</button>");
+            var URL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apiKey + "&limit=" + amount;
+            console.log(URL);
+            $.ajax({
+                url: URL,
+                method: "GET"
+            }).then(function (response) {
+                for (i = 0; i < 10; i++) {
+                    var src = response.data[i].images.fixed_width.url;
+                    $(".gifsPanel").prepend("<img src = " + src + ">")
+                }
+            });
         });
+        // $(".buttonPanel").on("click",function(){
+        //     for(var i = 0; i<)
+        // });
 
     </script>
 </body>
