@@ -38,9 +38,23 @@
                 }
             });
         });
-        // $(".buttonPanel").on("click",function(){
-        //     for(var i = 0; i<)
-        // });
+
+        $("#button").click(function(){
+            alert("hello")
+            var animal = $(this).attr("buttonName");
+            var URL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apiKey + "&limit=" + amount;
+            console.log(animal);
+            $(".gifsPanel").html("");
+            $.ajax({
+                url: URL,
+                method: "GET"
+            }).then(function (response) {
+                for (i = 0; i < 10; i++) {
+                    var src = response.data[i].images.fixed_width.url;
+                    $(".gifsPanel").prepend("<img src = " + src + ">")
+                }
+            });
+        });
 
     </script>
 </body>
